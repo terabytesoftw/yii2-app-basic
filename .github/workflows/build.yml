@@ -76,7 +76,9 @@ jobs:
       - name: Resolve DST Root CA X3 certs
         if: matrix.os == 'windows-latest'
         run: |
-            git update-git-for-windows
+            mkdir -p $GITHUB_WORKSPACE/certs
+            curl -s https://curl.haxx.se/ca/cacert.pem -o $GITHUB_WORKSPACE/certs/cacert.pem
+            SSL_CERT_FILE=$GITHUB_WORKSPACE/certs/cacert.pem
         
       - name: Install dependencies with composer php PHP [5.6 - 8.0]
         run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
