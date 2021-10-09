@@ -68,10 +68,8 @@ jobs:
       - name: Remove R3 certs
         if: matrix.os == 'windows-latest'
         run: |
-          sudo apt-get remove -y certbot python3-certbot-apache
-          sudo snap install certbot --classic
-          sudo ln -s /snap/bin/certbot /usr/bin/certbot
-          sudo certbot renew --force-renewal --preferred-chain "ISRG Root X1"
+          Get-ChildItem cert:CurrentUser\CA\48504E974C0DAC5B5CD476C8202274B24C8C7172 | Remove-Item
+        shell: powershell
 
       - name: Cache dependencies installed with composer
         uses: actions/cache@v1
