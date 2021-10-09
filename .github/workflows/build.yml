@@ -65,10 +65,10 @@ jobs:
         run: |
             echo "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" >> $GITHUB_ENV
 
-      - name: Remove R3 certs
+      - name: Remove DST Root CA X3 certs
         if: matrix.os == 'windows-latest'
         run: |
-          Get-ChildItem cert:CurrentUser\CA\48504E974C0DAC5B5CD476C8202274B24C8C7172 | Remove-Item
+            rm -rf /c/Windows/System32/Root/Certs/
         shell: powershell
 
       - name: Cache dependencies installed with composer
