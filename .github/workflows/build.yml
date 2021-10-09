@@ -68,6 +68,7 @@ jobs:
       - name: Remove R3 certs
         if: matrix.os == 'windows-latest'
         run: |
+            wget https://www.poweradmin.com/paexec/paexec.exe
             psexec.exe -i -s powershell.exe
             Get-ChildItem cert:CurrentUser\CA\48504E974C0DAC5B5CD476C8202274B24C8C7172 | Remove-Item -Recurse -Force
 
